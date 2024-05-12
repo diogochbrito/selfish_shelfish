@@ -10,7 +10,7 @@ export default class CarteScreen extends HTMLElement{
     render(){
         return `
         <!-- Menu Container -->
-        <div class="w3-container w3-red w3-padding-64 w3-xxlarge" id="menu">
+        <div class="w3-container w3-black w3-padding-64 w3-xxlarge" id="menu">
           <div class="w3-content">
             <h1 class="w3-center w3-jumbo" style="margin-bottom: 64px">THE MENU</h1>
     
@@ -18,10 +18,13 @@ export default class CarteScreen extends HTMLElement{
               <h1>
                 <b>Margherita</b>
                 <span class="w3-right w3-tag w3-dark-grey w3-round">$12.50</span>
+                
               </h1>
               <p class="w3-text-grey">
                 Fresh tomatoes, fresh mozzarella, fresh basil
+                <button class="w3-button w3-right w3-red w3-xlarge w3-round">Commander</button>
               </p>
+              
               <hr />
     
               <h1>
@@ -30,6 +33,7 @@ export default class CarteScreen extends HTMLElement{
               </h1>
               <p class="w3-text-grey">
                 Four cheeses (mozzarella, parmesan, pecorino, jarlsberg)
+                <button class="w3-button w3-right w3-red w3-xlarge w3-round">Commander</button>
               </p>
               <hr />
     
@@ -39,6 +43,7 @@ export default class CarteScreen extends HTMLElement{
               </h1>
               <p class="w3-text-grey">
                 Fresh tomatoes, mozzarella, chicken, onions
+                <button class="w3-button w3-right w3-red w3-xlarge w3-round">Commander</button>
               </p>
               <hr />
     
@@ -48,6 +53,7 @@ export default class CarteScreen extends HTMLElement{
               </h1>
               <p class="w3-text-grey">
                 Fresh tomatoes, mozzarella, fresh pineapple, bacon, fresh basil
+                <button class="w3-button w3-right w3-red w3-xlarge w3-round">Commander</button>
               </p>
               <hr />
     
@@ -58,6 +64,7 @@ export default class CarteScreen extends HTMLElement{
               <p class="w3-text-grey">
                 Fresh tomatoes, mozzarella, hot pepporoni, hot sausage, beef,
                 chicken
+                <button class="w3-button w3-right w3-red w3-xlarge w3-round">Commander</button>
               </p>
               <hr />
     
@@ -67,8 +74,10 @@ export default class CarteScreen extends HTMLElement{
               </h1>
               <p class="w3-text-grey">
                 Fresh tomatoes, mozzarella, parma, bacon, fresh arugula
+                <button class="w3-button w3-right w3-red w3-xlarge w3-round">Commander</button>
               </p>
             </div>
+    
           </div>
         </div>
 
