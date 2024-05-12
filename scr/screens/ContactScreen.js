@@ -17,21 +17,25 @@ export default class ContactScreen extends HTMLElement{
       let isValide = true;
       
       if(!this.emailRegex.test(entries.Email)){
-        e.target.querySelector("#email_error").textContent = "Le email n'est pas au bon format";
+        e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-red">Le email n'est pas au bon format</span>`;
         isValide = false;
       }
       else {
-        e.target.querySelector("#email_error").textContent = "Le email est pas au bon format";
+        e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-green">Le email est au bon format</span>`;
       }
       if(entries.Message.length < 1) {
-        e.target.querySelector("#message_error").textContent = "Veuillez inserez un message";
+        e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-red">Veuillez inserez un message</span>`;
         isValide = false;
       }
       else {
-        e.target.querySelector("#message_error").textContent = "Le message est bon";
+        e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-green">Le message est bon</span>`;
       }
       if(isValide){
         //envoie des données vers le back-end
+        e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-green">Données envoyées</span>`;
+      }
+      else {
+        e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-red">Données NON envoyées</span>`;
       }
       console.log(isValide);
     }
@@ -89,6 +93,7 @@ export default class ContactScreen extends HTMLElement{
                   ENVOYER MESSAGE
                 </button>
               </p>
+              <span id="message_success"></span>
             </form>
           </div>
         </div>
