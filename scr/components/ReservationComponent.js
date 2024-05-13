@@ -65,9 +65,7 @@ export default class ReservationComponent extends HTMLElement{
             />
           </p>
           <p>
-            <button class="w3-button w3-light-grey w3-block" type="submit">
-              SEND MESSAGE
-            </button>
+            <button class="w3-button w3-light-grey w3-block" type="submit">SEND MESSAGE</button>
           </p>
         </form>
       </div>
