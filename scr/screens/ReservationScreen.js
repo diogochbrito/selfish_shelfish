@@ -1,4 +1,3 @@
-import ReservationComponent from "../components/ReservationComponent.js";
 import FooterComponent from "../components/FooterComponent.js";
 
 export default class ReservationScreen extends HTMLElement{
@@ -6,13 +5,97 @@ export default class ReservationScreen extends HTMLElement{
     constructor(){
         super();
         this.innerHTML = this.render();
+        this.querySelector("form").onsubmit = this.handleLoginFormSubmit;
+    }
+
+    emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    handleLoginFormSubmit = (e) => {
+        e.preventDefault();
+        const entries = Object.fromEntries(new FormData(e.target)); //gets all inputs from form
+
+        let isValide = true;
+
+        if(!this.emailRegex.test(entries.Email)){
+            e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-red">Le email n'est pas au bon format</span>`;
+            isValide = false;
+        }
+        else {
+            e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-green">Le email est au bon format</span>`;
+        }
+        if(entries.Message.length < 1) {
+            e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-red">Veuillez inserez un message</span>`;
+            isValide = false;
+        }
+        else {
+            e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-green">Le message est bon</span>`;
+        }
+        if(isValide){
+        //envoie des données vers le back-end
+            e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-green">Données envoyées</span>`;
+        }
+        else {
+            e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-red">Données NON envoyées</span>`;
+        }
+        console.log(isValide);
     }
 
     render(){
         return `
-        <reservation-component></reservation-component>
-        <footer-component></footer-component>
-        `;
+        <!-- Reservation -->
+    <div class="w3-container w3-padding-64 w3-blue w3-xlarge">
+        <div class="w3-content">
+            <h1 class="w3-center w3-jumbo" style="margin-bottom: 64px">Reservation</h1>
+            <p>Find us at some address at some place or call us at 05050515-122330</p>
+            <p><span class="w3-tag">FYI!</span> Check our opening times !</p>
+            <p class="w3-xxlarge"><strong>Reserve</strong> a table:</p>
+
+        <form action="/action_page.php" target="_blank">
+            <p>
+            <input
+                class="w3-input w3-padding-16 w3-border"
+                type="text"
+                placeholder="Name"
+                required
+                name="Name"/>
+            </p>
+
+            <p>
+            <input
+                class="w3-input w3-padding-16 w3-border"
+                type="number"
+                placeholder="How many people for the table"
+                required
+                name="People"/>
+            </p>
+
+            <p>
+            <input
+                class="w3-input w3-padding-16 w3-border"
+                type="datetime-local"
+                placeholder="Date and time"
+                required
+                name="date"
+                value="2020-11-16T20:00"/>
+            </p>
+
+            <p>
+            <input
+                class="w3-input w3-padding-16 w3-border"
+                type="text"
+                placeholder="Message \ Special requirements : reduced mobility or allergies"
+                required
+                name="Message"/>
+            </p>
+
+            <p>
+            <button class="w3-button w3-light-grey w3-block" type="submit">SEND REGISTRATION</button>
+            </p>
+        </form>
+        </div>
+    </div>
+    <footer-component></footer-component>
+    `;
     }
 }
 customElements.define("reservation-screen", ReservationScreen);
