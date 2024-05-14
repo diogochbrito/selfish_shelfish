@@ -8,7 +8,7 @@ export default class ReservationScreen extends HTMLElement{
         this.querySelector("form").onsubmit = this.handleLoginFormSubmit;
     }
 
-    emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    phoneRegex = /^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/;
 
     handleLoginFormSubmit = (e) => {
         e.preventDefault();
@@ -16,23 +16,23 @@ export default class ReservationScreen extends HTMLElement{
 
         let isValide = true;
 
-        if(!this.emailRegex.test(entries.Email)){
-            e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-red">Le email n'est pas au bon format</span>`;
+        if(!this.phoneRegex.test(entries.Phone)){
+            e.target.querySelector("#phone_error").innerHTML = `<span class="w3-text-red">Le numéro de téléphone n'est pas au bon format</span>`;
             isValide = false;
         }
         else {
-            e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-green">Le email est au bon format</span>`;
+            e.target.querySelector("#phone_error").innerHTML = `<span class="w3-text-white">Le numéro est au bon format</span>`;
         }
         if(entries.Message.length < 1) {
             e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-red">Veuillez inserez un message</span>`;
             isValide = false;
         }
         else {
-            e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-green">Le message est bon</span>`;
+            e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-white">Le message est bon</span>`;
         }
         if(isValide){
         //envoie des données vers le back-end
-            e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-green">Données envoyées</span>`;
+            e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-white">Données envoyées</span>`;
         }
         else {
             e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-red">Données NON envoyées</span>`;
@@ -43,14 +43,14 @@ export default class ReservationScreen extends HTMLElement{
     render(){
         return `
         <!-- Reservation -->
-    <div class="w3-container w3-padding-64 w3-blue w3-xlarge">
+    <div class="w3-container w3-padding-64 w3-orange w3-xlarge">
         <div class="w3-content">
             <h1 class="w3-center w3-jumbo" style="margin-bottom: 64px">Reservation</h1>
             <p>Find us at some address at some place or call us at 05050515-122330</p>
             <p><span class="w3-tag">FYI!</span> Check our opening times !</p>
             <p class="w3-xxlarge"><strong>Reserve</strong> a table:</p>
 
-        <form action="/action_page.php" target="_blank">
+        <form action="/action_page.php" target="_blank" novalidate>
             <p>
             <input
                 class="w3-input w3-padding-16 w3-border"
@@ -59,6 +59,17 @@ export default class ReservationScreen extends HTMLElement{
                 required
                 name="Name"/>
             </p>
+
+            <p>
+            <input
+                class="w3-input w3-padding-16 w3-border"
+                type="tel"
+                placeholder="06-35-87-11-53"
+                pattern="[0-7]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
+                required
+                name="Phone"/>
+            </p>
+            <span id="phone_error"></span>
 
             <p>
             <input
@@ -76,7 +87,7 @@ export default class ReservationScreen extends HTMLElement{
                 placeholder="Date and time"
                 required
                 name="date"
-                value="2020-11-16T20:00"/>
+                value="2024-05-16T20:00"/>
             </p>
 
             <p>
@@ -87,10 +98,12 @@ export default class ReservationScreen extends HTMLElement{
                 required
                 name="Message"/>
             </p>
+            <span id="message_error"></span>
 
             <p>
             <button class="w3-button w3-light-grey w3-block" type="submit">SEND REGISTRATION</button>
             </p>
+            <span id="message_success"></span>
         </form>
         </div>
     </div>
