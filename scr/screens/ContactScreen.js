@@ -1,4 +1,5 @@
 import FooterComponent from "../components/FooterComponent.js";
+import ContactService from "../services/ContactService.js";
 
 export default class ContactScreen extends HTMLElement{
 
@@ -16,14 +17,14 @@ export default class ContactScreen extends HTMLElement{
       
       let isValide = true;
       
-      if(!this.emailRegex.test(entries.Email)){
+      if(!this.emailRegex.test(entries.email)){
         e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-red">Le email n'est pas au bon format</span>`;
         isValide = false;
       }
       else {
         e.target.querySelector("#email_error").innerHTML = `<span class="w3-text-green">Le email est au bon format</span>`;
       }
-      if(entries.Message.length < 1) {
+      if(entries.message.length < 1) {
         e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-red">Veuillez inserez un message</span>`;
         isValide = false;
       }
@@ -33,6 +34,9 @@ export default class ContactScreen extends HTMLElement{
       if(isValide){
         //envoie des données vers le back-end
         e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-green">Données envoyées</span>`;
+        const contactService = new ContactService();
+        contactService.create(entries);
+        
       }
       else {
         e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-red">Données NON envoyées</span>`;
@@ -64,7 +68,7 @@ export default class ContactScreen extends HTMLElement{
                   type="text"
                   placeholder="Nom"
                   required
-                  name="Nom"
+                  name="nom"
                 />
               </p>
               <p>
@@ -73,7 +77,7 @@ export default class ContactScreen extends HTMLElement{
                   type="email"
                   placeholder="Email"
                   required
-                  name="Email"
+                  name="email"
                 />
               </p>
               <span id="email_error"></span>
@@ -84,16 +88,18 @@ export default class ContactScreen extends HTMLElement{
                   type="text"
                   placeholder="Message \ Special requirements"
                   required
-                  name="Message"
+                  name="message"
                 />
               </p>
               <span id="message_error"></span>
+
               <p>
                 <button class="w3-button w3-light-grey w3-block" type="submit">
                   ENVOYER MESSAGE
                 </button>
               </p>
               <span id="message_success"></span>
+              
             </form>
           </div>
         </div>

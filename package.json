@@ -1,0 +1,16 @@
+{
+  "name": "selfish_shelfish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ws --spa index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "local-web-server": "^5.3.3",
+    "node": "^20.13.1"
+  }
+}
