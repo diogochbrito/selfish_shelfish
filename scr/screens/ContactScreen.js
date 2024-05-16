@@ -31,16 +31,20 @@ export default class ContactScreen extends HTMLElement{
       else {
         e.target.querySelector("#message_error").innerHTML = `<span class="w3-text-green">Le message est bon</span>`;
       }
-      if(isValide){
-        //envoie des données vers le back-end
-        e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-green">Données envoyées</span>`;
+      
+      if(isValide){//envoie des données vers le back-end
+        //e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-green">Données envoyées</span>`;
+
+        //creates a new instance of the ContactService class and assigns it to the variable contactService.
         const contactService = new ContactService();
+
+        //calls the create method of the contactService object, passing the entries variable as an argument. This likely sends the data to the backend for processing and storage.
         contactService.create(entries);
-        
       }
       else {
-        e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-red">Données NON envoyées</span>`;
+        e.target.querySelector("#message_success").innerHTML = `<span class="w3-text-red">Message NON envoyé</span>`;
       }
+      
       console.log(isValide);
     }
 
